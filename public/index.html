@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Genshin Feed Viewer</title>
+</head>
+<body>
+  <h1>Reddit Feed: /u/genshinimpact</h1>
+  <ul id="feed"></ul>
+
+  <script>
+    fetch('/api/rss?feedURL=https://www.reddit.com/user/genshinimpact/.rss')
+      .then(res => res.json())
+      .then(data => {
+        const list = document.getElementById('feed');
+        data.items.forEach(item => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="${item.link}">${item.title}</a><br>${item.contentSnippet}`;
+          list.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>
